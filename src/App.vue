@@ -1,22 +1,46 @@
 <template>
-  <div class="menu">
-    <a v-for="(menu,i) in menus" :key="i">{{ menu }} + {{i}}</a>
+  <div class="black-bg" v-if="modal" @click="modal = false">
+    <div class="white-bg">
+      <h4>상세 페이지</h4>
+      <p>내용</p>
+    </div>
   </div>
-  <div v-for="pro in products" :key="pro">
-    <h4 class="red">{{ pro }}</h4>
-    <p>50 원
-    </p>
+  <div class="menu">
+  </div>
+  <img src="./assets/honey_blueMo.jpg" class="wrap-img">
+  <div>
+    <h4 class="red" @click="modal = true">{{ products[0] }}</h4>
+    <p>50 원</p>
+    <button @click="increase(0)">신고</button> <span>count: {{cnt[0]}}</span>
+  </div>
+  <div>
+    <h4 class="red">{{ products[1] }}</h4>
+    <p>40 원</p>
+    <button @click="increase(1)">신고</button> <span>count: {{cnt[1]}}</span>
+  </div>
+  <div>
+    <h4 class="red">{{ products[2] }}</h4>
+    <p>30 원</p>
+    <button @click="increase(2)">신고</button> <span>count: {{cnt[2]}}</span>
   </div>
 </template>
 
 <script>
 
+
 export default {
   name: 'App',
-  data(){
-    return{
-      menus : ['home', 'shop', 'about'],
-      products : ['AA', 'BB', 'CC']
+  data() {
+    return {
+      modal:false,
+      cnt:[0,0,0],
+      menus: ['home', 'shop', 'about'],
+      products: ['AA', 'BB', 'CC']
+    }
+  },
+  methods:{
+    increase(i) {
+      this.cnt[i]++;
     }
   },
   components: {
@@ -43,5 +67,28 @@ export default {
 .menu a {
   color: white;
   padding: 10px;
+}
+
+.wrap-img {
+  height: 500px;
+}
+body {
+  margin: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.black-bg{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed; 
+  padding: 20px;
+}
+.white-bg {
+  width:100%;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
